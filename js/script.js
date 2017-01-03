@@ -39,7 +39,7 @@ $(document).ready(function() {
 		$('.user-options, .arrow-up').slideToggle('fast');
 	});
 
-	$('.story').hover(function() {
+	$('.story a').hover(function() {
 		$(this).children('.overlay').fadeIn('fast');
 	}, function() {
 		$(this).children('.overlay').fadeOut('fast');
