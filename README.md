@@ -10,3 +10,7 @@ pass: 1234
 
 user: carl_grimes
 pass: 5678
+
+Static Website (no php)
+-----------
+https://laurad3.github.io/dr-pavels-library/index.html

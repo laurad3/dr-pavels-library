@@ -39,15 +39,28 @@ $(document).ready(function() {
 		$('.user-options, .arrow-up').slideToggle('fast');
 	});
 
-	$('.story').hover(function() {
+	$('.story a').hover(function() {
 		$(this).children('.overlay').fadeIn('fast');
 	}, function() {
 		$(this).children('.overlay').fadeOut('fast');
 	});
 
 	$('.like i').on('click', function() {
-		var isFavorite = $(this).attr('class').split(' ').slice(-1);
-		console.log(isFavorite);
+		var isFavorite = $(this).attr('class').split(' ').slice(-1)[0];
+		var storyId = $(this).attr('id');
+		var number = parseInt($('.number').text());
+
+		$.post('db/liked_story.php', {storyId: storyId, isFavorite: isFavorite}, function(data) {
+			console.log(data);
+
+			if(data == 'liked') {
+				number = number + 1;
+				$('.number').html(number);
+			} else if(data == 'disliked') {
+				number = number - 1;
+				$('.number').html(number);
+			}
+		});
 
 		if(isFavorite == 'unfavorited') {
 			// change icon

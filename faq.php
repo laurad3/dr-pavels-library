@@ -1,3 +1,10 @@
+<?php
+	// ini_set('display_errors', 1);
+	// error_reporting(E_ALL);
+
+	session_start();
+	require 'db/db.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,32 +15,20 @@
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,700|Satisfy" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Londrina+Shadow" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
-
 	<script src="https://use.fontawesome.com/e1a59946d4.js"></script>
 </head>
 <body>
 	<div class="container">
 		<header>
-			<a href="index.html" class="logo"><img src="images/logo.svg" alt="logo"></a>
+			<a href="index.php" class="logo"><img src="images/logo.svg" alt="logo"></a>
 			<p class="slogan">Create Stories. Work Together. Share with Friends.</p>
 			
 			<div class="user">
-				<div class="my-user">
-					<div class="user-name">Laurad</div>
-					<div class="user-btn">
-						<img src="images/avatar.jpg" alt="">
-					</div>
-				</div>
-
-				<div class="arrow-up"></div>
-				<div class="user-options">
-					<div class="option"><a href="create-story.html">Create Story</a></div>
-					<div class="option"><a href="my-stories.html">My Stories</a></div>
-
-					<div class="option"><a href="login.html" class="logout">Logout</a></div>
-				</div>
-
-				<!-- <a href="login.html" class="login-btn">Login</a> -->
+				<?php if(isset($_SESSION['user'])): ?>
+					<?php require 'includes/user.php'; ?>
+				<?php else: ?>
+					<a href="login.php" class="login-btn">Login</a>
+				<?php endif; ?>
 			</div>
 
 			<div class="mobile-nav-bar">
@@ -47,20 +42,22 @@
 			</div>
 			<nav class="mobile-nav">
 				<ul>
-					<li><a href="about.html">about</a></li>
-					<li><a href="stories.html">stories</a></li>
-					<li><a href="contests.html">contests</a></li>
-					<li><a href="faq.html" class="active">faq</a></li>
-					<li><a href="login.html">login</a></li>
+					<li><a href="about.php">about</a></li>
+					<li><a href="stories.php">stories</a></li>
+					<li><a href="contests.php">contests</a></li>
+					<li><a href="faq.php" class="active">faq</a></li>
+					<?php if (!isset($_SESSION['user'])): ?>
+						<li><a href="login.php">login</a></li>
+					<?php endif; ?>
 				</ul>
 			</nav>
 
 			<nav class="main-nav">
 				<ul>
-					<li><a href="about.html">about</a></li>
-					<li><a href="stories.html">stories</a></li>
-					<li><a href="contests.html">contests</a></li>
-					<li><a href="faq.html" class="active">faq</a></li>
+					<li><a href="about.php">about</a></li>
+					<li><a href="stories.php">stories</a></li>
+					<li><a href="contests.php">contests</a></li>
+					<li><a href="faq.php" class="active">faq</a></li>
 				</ul>
 			</nav>
 		</header>

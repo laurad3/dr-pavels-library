@@ -1,3 +1,10 @@
+<?php
+	// ini_set('display_errors', 1);
+	// error_reporting(E_ALL);
+
+	session_start();
+	require 'db/db.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,26 +20,15 @@
 <body>
 	<div class="container">
 		<header>
-			<a href="index.html" class="logo"><img src="images/logo.svg" alt=""></a>
+			<a href="index.php" class="logo"><img src="images/logo.svg" alt=""></a>
 			<p class="slogan">Create Stories. Work Together. Share with Friends.</p>
 			
 			<div class="user">
-				<div class="my-user">
-					<div class="user-name">Laurad</div>
-					<div class="user-btn">
-						<img src="images/avatar.jpg" alt="logo">
-					</div>
-				</div>
-
-				<div class="arrow-up"></div>
-				<div class="user-options">
-					<div class="option"><a href="create-story.html">Create Story</a></div>
-					<div class="option"><a href="my-stories.html">My Stories</a></div>
-
-					<div class="option"><a href="login.html" class="logout">Logout</a></div>
-				</div>
-
-				<!-- <a href="login.html" class="login-btn">Login</a> -->
+				<?php if(isset($_SESSION['user'])): ?>
+					<?php require 'includes/user.php'; ?>
+				<?php else: ?>
+					<a href="login.php" class="login-btn">Login</a>
+				<?php endif; ?>
 			</div>
 	
 			<div class="mobile-nav-bar">
@@ -46,20 +42,22 @@
 			</div>
 			<nav class="mobile-nav">
 				<ul>
-					<li><a href="about.html">about</a></li>
-					<li><a href="stories.html">stories</a></li>
-					<li><a href="contests.html">contests</a></li>
-					<li><a href="faq.html">faq</a></li>
-					<li><a href="login.html">login</a></li>
+					<li><a href="about.php">about</a></li>
+					<li><a href="stories.php">stories</a></li>
+					<li><a href="contests.php">contests</a></li>
+					<li><a href="faq.php">faq</a></li>
+					<?php if (!isset($_SESSION['user'])): ?>
+						<li><a href="login.php">login</a></li>
+					<?php endif; ?>
 				</ul>
 			</nav>
 
 			<nav class="main-nav">
 				<ul>
-					<li><a href="about.html">about</a></li>
-					<li><a href="stories.html">stories</a></li>
-					<li><a href="contests.html">contests</a></li>
-					<li><a href="faq.html">faq</a></li>
+					<li><a href="about.php">about</a></li>
+					<li><a href="stories.php">stories</a></li>
+					<li><a href="contests.php">contests</a></li>
+					<li><a href="faq.php">faq</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -67,18 +65,20 @@
 		<div class="content">
 			<div class="title">Create Story</div>
 
-			<form action="#" method="post" class="create-story-form" enctype="multipart/form-data">
+			<form action="db/create_story.php" method="post" class="create-story-form" enctype="multipart/form-data">
 				<div class="story-cover">
-					<input type="file" class="inputfile" id="image-file">
+					<input type="file" name="story-image" class="inputfile" id="image-file">
 					<label for="image-file" class="upload-story-image"><i class="fa fa-picture-o" aria-hidden="true"></i></label>
-					<img src="images/example.jpg" alt="" class="uploaded-image">
+					<img src="images/example.jpg" alt="story image" class="uploaded-image">
 
 					<div class="create-story-title-container">
 						<input type="text" name="story-title" placeholder="What's the Title?">
 					</div>
 				</div>
 
-				<textarea name="" id="" cols="30" rows="10" placeholder="Start your story here..."></textarea>
+				<textarea name="story-text" id="" cols="30" rows="10" placeholder="Start your story here..."></textarea>
+				
+				<div class="subtitle">Choose Genre</div>
 
 				<div class="choose-genre">
 					<input type="radio" name="story-genre" value="horror" id="horror-option">
@@ -103,7 +103,7 @@
 					<label for="scifi-option">Sci-Fi</label>
 				</div>
 
-				<input type="submit" class="create-btn" value="Create">
+				<input type="submit" class="create-btn" value="Create" name="create-story">
 			</form>
 		</div>
 	</div>

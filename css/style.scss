@@ -1033,15 +1033,16 @@ header {
 	font-family:'Cormorant Garamond', serif;
 	margin:5px 0;
 }
-.image-error-message {
+.centered-error-message {
 	text-align:center;
 	font-size:14pt;
 	margin:10px 0 !important;
+	font-family:'Cormorant Garamond', serif;
 }
 .success {
 	color:$olive;
 	font-family:'Cormorant Garamond', serif;
-	margin:10px 0;
+	margin:10px 0 35px 0;
 	font-size:14pt;
 	text-align:center;
 }

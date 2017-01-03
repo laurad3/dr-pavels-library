@@ -761,10 +761,11 @@ header {
   font-family: 'Cormorant Garamond', serif;
   margin: 5px 0; }
 
-.image-error-message {
+.centered-error-message {
   text-align: center;
   font-size: 14pt;
-  margin: 10px 0 !important; }
+  margin: 10px 0 !important;
+  font-family: 'Cormorant Garamond', serif; }
 
 .success {
   color: #a3aa84;
